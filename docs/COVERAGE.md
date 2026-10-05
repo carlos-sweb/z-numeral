@@ -57,7 +57,7 @@ A limitation in Zig 0.16.0's LLVM backend for direct `u4096` to `f64` conversion
 
 The 89 public functions in the source modules have `///` comments, including support functions. `docs/API.md` describes parameters, ownership, limits, and errors; `README.md` contains seven executable snippets. `zig build docs` generates browsable reference documentation in `zig-out/docs`.
 
-The example checker verifies that the complete README manifest matches `examples/consumer/build.zig.zon` and builds a consumer application with the documented module import. Normal checks substitute a local dependency to stay offline and test the current source. `python3 tools/check-docs.py --remote` retains the pinned URL and hash; private packages must first be cached using the authenticated download documented in the README. Temporary files are stored in `.cache/docs`, excluded from version control.
+The example checker verifies that the complete README manifest matches `examples/consumer/build.zig.zon` and builds a consumer application with the documented module import. Normal checks substitute a local dependency to stay offline and test the current source. `python3 tools/check-docs.py --remote` retains the pinned URL and hash and can fetch the public archive directly without authentication. Temporary files are stored in `.cache/docs`, excluded from version control.
 
 ## Intentional differences
 

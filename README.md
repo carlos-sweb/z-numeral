@@ -33,14 +33,7 @@ The library's package manifest is [build.zig.zon](build.zig.zon). In your applic
 
 The example application has its own package name and fingerprint. For an existing application, keep its name, fingerprint, version, and paths, and add only the `z_numeral` entry to `.dependencies`.
 
-The repository is currently private. With an authenticated GitHub CLI account that has access, download and cache the pinned package before building (run these commands from your application's directory):
-
-```sh
-gh api repos/carlos-sweb/z-numeral/tarball/75ae970a92c164c0dd0a9474a26da64308eb6723 > z-numeral.tar.gz
-zig fetch z-numeral.tar.gz
-```
-
-`zig fetch` must print the hash shown above. Subsequent builds resolve the dependency from Zig's cache. If the repository becomes public, Zig can fetch the URL directly.
+The repository is public. Zig fetches the pinned archive and verifies its hash automatically when you run `zig build`; no GitHub authentication is required.
 
 In `build.zig`, import the module into your executable:
 
@@ -49,7 +42,7 @@ const numeral_dependency = b.dependency("z_numeral", .{ .target = target, .optim
 exe.root_module.addImport("numeral", numeral_dependency.module("numeral"));
 ```
 
-In your code, use `const numeral = @import("numeral");`. The complete standalone application is in [examples/consumer](examples/consumer); run it with `zig build run` from that directory after caching the package. [examples/basic.zig](examples/basic.zig) contains the library demo; running `zig build run` from the library root prints:
+In your code, use `const numeral = @import("numeral");`. The complete standalone application is in [examples/consumer](examples/consumer); run it with `zig build run` from that directory. [examples/basic.zig](examples/basic.zig) contains the library demo; running `zig build run` from the library root prints:
 
 ```text
 1,234,567.00

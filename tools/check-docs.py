@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile README examples and verify package installation locally or from cache."""
+"""Compile README examples and verify package installation locally or from the pinned URL."""
 from pathlib import Path
 import argparse
 import re
@@ -7,7 +7,7 @@ import os
 import subprocess
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--remote', action='store_true', help='Use the pinned URL/hash instead of a local checkout; private packages must be cached first')
+parser.add_argument('--remote', action='store_true', help='Use the public pinned URL/hash instead of a local checkout')
 args = parser.parse_args()
 
 ROOT = Path(__file__).resolve().parents[1]
