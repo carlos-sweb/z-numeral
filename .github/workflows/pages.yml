@@ -25,8 +25,8 @@ jobs:
       - name: Assemble documentation site
         run: |
           mkdir -p zig-out/site/api
+          cp -R zig-out/docs/. zig-out/site/
           cp -R zig-out/docs/. zig-out/site/api/
-          cp site/index.html zig-out/site/index.html
           touch zig-out/site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

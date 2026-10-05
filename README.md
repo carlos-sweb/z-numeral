@@ -15,7 +15,7 @@ try std.testing.expectEqualStrings("1,234,567.00", result);
 
 ## Documentation
 
-[Documentation site](https://carlos-sweb.github.io/z-numeral/) · [Generated Zig API reference](https://carlos-sweb.github.io/z-numeral/api/)
+[Generated Zig API reference](https://carlos-sweb.github.io/z-numeral/)
 
 ## Installation
 
@@ -167,7 +167,7 @@ zig fmt --check build.zig src examples
 python3 tools/check-docs.py
 ```
 
-The documentation workflow regenerates the Zig API reference and publishes it with the entry page to GitHub Pages on every push to `main`. To preview the API locally, run `zig build docs` and serve `zig-out/docs` over HTTP.
+The documentation workflow regenerates the Zig API reference and publishes it directly at the GitHub Pages root on every push to `main`. To preview the API locally, run `zig build docs` and serve `zig-out/docs` over HTTP.
 
 Fixtures are included: normal tests download nothing. To regenerate them:
 
