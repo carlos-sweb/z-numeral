@@ -1,0 +1,34 @@
+name: Zig
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        optimize: [Debug, ReleaseSafe]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: 0.16.0
+      - run: zig fmt --check build.zig src examples
+      - run: zig build test -Doptimize=${{ matrix.optimize }}
+      - run: zig build examples -Doptimize=${{ matrix.optimize }}
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mlugg/setup-zig@v2
+        with:
+          version: 0.16.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --prefix tools --ignore-scripts --no-audit --no-fund
+      - run: node tools/generate.mjs
+      - run: git diff --exit-code -- src/locales.zig src/fixtures.json
+      - run: python3 tools/check-docs.py

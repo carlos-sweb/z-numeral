@@ -1,0 +1,7 @@
+z-numeral contains locale data and translated formatting, parsing and ordinal
+rules derived from numbro 2.5.0, Copyright (c) Benjamin Van Ryseghem and contributors,
+and Numeral.js, Copyright (c) Adam Draper and contributors.
+The original MIT license notices are retained in LICENSE and LICENSE-Numeraljs.
+Locale author notices are reproduced in docs/locale-authors.txt.
+The runtime contains only Zig source. numbro and bignumber.js are development-only
+reference dependencies pinned by tools/package-lock.json.

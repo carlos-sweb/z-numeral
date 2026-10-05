@@ -1,0 +1,1 @@
+{"private":true,"type":"module","scripts":{"generate":"node generate.mjs"},"devDependencies":{"numbro":"2.5.0"}}
