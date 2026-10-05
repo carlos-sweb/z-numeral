@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Compile README Zig examples and verify local-package installation offline."""
+"""Compile README examples and verify package installation locally or from cache."""
 from pathlib import Path
+import argparse
 import re
 import os
 import subprocess
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--remote', action='store_true', help='Use the pinned URL/hash instead of a local checkout; private packages must be cached first')
+args = parser.parse_args()
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / '.cache' / 'docs'
@@ -13,7 +18,7 @@ examples = []
 manifest_fragment = None
 build_fragment = None
 for block in blocks:
-    if block.startswith('.z_numeral ='):
+    if block.startswith('.{') and '.dependencies' in block:
         manifest_fragment = block
     elif 'b.dependency(' in block:
         build_fragment = block
@@ -35,17 +40,16 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
     const exe = b.addExecutable(.{ .name = "consumer", .root_module = b.createModule(.{ .root_source_file = b.path("main.zig"), .target = target, .optimize = optimize }) });
 ''' + build_fragment + '\n b.installArtifact(exe);\n}\n')
-fragment = manifest_fragment.replace('../z-numeral', os.path.relpath(ROOT, consumer).replace(os.sep, '/'))
-manifest = '.{ .name = .z_numeral_docs, .fingerprint = 0x11111111ca6f7933, .version = "0.0.0", .minimum_zig_version = "0.16.0", .dependencies = .{ ' + fragment + ' }, .paths = .{ "" } }\n'
-(consumer / 'build.zig.zon').write_text(manifest)
-# The compiler validates the name-derived fingerprint. Bootstrap its prefix
-# once for this disposable consumer; the package fingerprint stays unchanged.
-probe = subprocess.run(['zig', 'build'], cwd=consumer, text=True, capture_output=True)
-if probe.returncode:
-    suggestion = re.search(r'use this value: (0x[0-9a-f]+)', probe.stderr)
-    if not suggestion:
-        raise RuntimeError(probe.stderr)
-    manifest = manifest.replace('0x11111111ca6f7933', suggestion.group(1))
-    (consumer / 'build.zig.zon').write_text(manifest)
-    subprocess.run(['zig', 'build'], cwd=consumer, check=True)
-print(f'{len(examples)} README examples and package installation verified')
+assert manifest_fragment.strip() == (ROOT / 'examples/consumer/build.zig.zon').read_text().strip(), 'README manifest differs from the standalone consumer'
+manifest = manifest_fragment
+if not args.remote:
+    # Keep normal documentation checks offline while testing the current source.
+    local_path = os.path.relpath(ROOT, consumer).replace(os.sep, '/')
+    manifest, replacements = re.subn(
+        r'\.url = "[^"\n]+",\s*\.hash = "[^"\n]+",',
+        lambda _: f'.path = "{local_path}",', manifest, count=1)
+    assert replacements == 1, 'Remote dependency URL/hash missing'
+(consumer / 'build.zig.zon').write_text(manifest + '\n')
+subprocess.run(['zig', 'build'], cwd=consumer, check=True)
+mode = 'pinned URL/hash' if args.remote else 'local checkout'
+print(f'{len(examples)} README examples and package installation verified ({mode})')

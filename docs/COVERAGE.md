@@ -21,7 +21,7 @@ Pinned reference: **numbro 2.5.0 + bignumber.js 9.3.1**, with integrity hashes i
 | Explicit memory management | Buffer, allocator, and writer | Exact/short buffers, failure propagation, and failure at every allocation |
 | Complete catalog | 61 unique tags from the reference package | Fixtures for locales, rules, and named formats |
 | Custom locales and fallback | Borrowed `Locale`, exact lookup, explicit fallback | UTF-8 separators, custom grouping, callbacks, and unknown tags |
-| Package and documentation | `numeral` module, manifest, and English guides | Independent local consumer and seven README examples |
+| Package and documentation | `numeral` module, manifest, and English guides | Complete consumer manifest, pinned archive hash, and seven README examples |
 
 ## Reproducible corpus
 
@@ -57,7 +57,7 @@ A limitation in Zig 0.16.0's LLVM backend for direct `u4096` to `f64` conversion
 
 The 89 public functions in the source modules have `///` comments, including support functions. `docs/API.md` describes parameters, ownership, limits, and errors; `README.md` contains seven executable snippets. `zig build docs` generates browsable reference documentation in `zig-out/docs`.
 
-The example checker also builds a consumer application using the exact installation snippets from the README. Temporary files are stored in `.cache/docs`, excluded from version control.
+The example checker verifies that the complete README manifest matches `examples/consumer/build.zig.zon` and builds a consumer application with the documented module import. Normal checks substitute a local dependency to stay offline and test the current source. `python3 tools/check-docs.py --remote` retains the pinned URL and hash; private packages must first be cached using the authenticated download documented in the README. Temporary files are stored in `.cache/docs`, excluded from version control.
 
 ## Intentional differences
 
