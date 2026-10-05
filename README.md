@@ -1,6 +1,6 @@
 # z-numeral
 
-[Documentation on GitHub Pages](https://carlos-sweb.github.io/z-numeral/)
+[API reference](https://carlos-sweb.github.io/z-numeral/)
 
 Number formatting for **Zig 0.16.0**, with clear options, numbro patterns, and 61 locales. The module is named `numeral`. It requires no JavaScript, libc, or external runtime dependencies.
 
@@ -12,10 +12,6 @@ const result = try numeral.formatBuf(&buffer, 1234567, .{
 });
 try std.testing.expectEqualStrings("1,234,567.00", result);
 ```
-
-## Documentation
-
-[Generated Zig API reference](https://carlos-sweb.github.io/z-numeral/)
 
 ## Installation
 
