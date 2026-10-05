@@ -11,6 +11,10 @@ const result = try numeral.formatBuf(&buffer, 1234567, .{
 try std.testing.expectEqualStrings("1,234,567.00", result);
 ```
 
+## Documentation
+
+[Documentation site](https://carlos-sweb.github.io/z-numeral/) · [Generated Zig API reference](https://carlos-sweb.github.io/z-numeral/api/)
+
 ## Installation
 
 Run this command from your Zig project's directory:
@@ -160,6 +164,8 @@ zig build run
 zig fmt --check build.zig src examples
 python3 tools/check-docs.py
 ```
+
+The documentation workflow regenerates the Zig API reference and publishes it with the entry page to GitHub Pages on every push to `main`. To preview the API locally, run `zig build docs` and serve `zig-out/docs` over HTTP.
 
 Fixtures are included: normal tests download nothing. To regenerate them:
 

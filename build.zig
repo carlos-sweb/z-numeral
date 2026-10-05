@@ -9,7 +9,7 @@ pub fn build(b: *std.Build) void {
     b.step("examples", "Compile examples").dependOn(&example.step);
     b.step("run", "Run examples").dependOn(&b.addRunArtifact(example).step);
     b.getInstallStep().dependOn(&example.step);
-    const docs_object = b.addObject(.{ .name = "numeral-docs", .root_module = mod });
+    const docs_object = b.addObject(.{ .name = "numeral", .root_module = mod });
     const docs_install = b.addInstallDirectory(.{ .source_dir = docs_object.getEmittedDocs(), .install_dir = .prefix, .install_subdir = "docs" });
     b.step("docs", "Generate Zig API documentation in zig-out/docs").dependOn(&docs_install.step);
     const check = b.step("check", "Compile tests and examples without running (also for cross targets)");
