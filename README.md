@@ -13,27 +13,13 @@ try std.testing.expectEqualStrings("1,234,567.00", result);
 
 ## Installation
 
-The library's package manifest is [build.zig.zon](build.zig.zon). In your application, create a separate `build.zig.zon` declaring the dependency by URL and content hash. This complete example pins the initial implementation:
+Run this command from your Zig project's directory:
 
-```zig
-.{
-    .name = .numeral_consumer,
-    .version = "0.0.0",
-    .fingerprint = 0xc23a16e5828e8b35,
-    .minimum_zig_version = "0.16.0",
-    .dependencies = .{
-        .z_numeral = .{
-            .url = "https://github.com/carlos-sweb/z-numeral/archive/75ae970a92c164c0dd0a9474a26da64308eb6723.tar.gz",
-            .hash = "z_numeral-0.1.0-M3lvynbBmAB5mc4J16LzgHYPtvmOomSfcmPmwHED6huh",
-        },
-    },
-    .paths = .{ "build.zig", "build.zig.zon", "main.zig" },
-}
+```sh
+zig fetch --save=z_numeral https://github.com/carlos-sweb/z-numeral/archive/75ae970a92c164c0dd0a9474a26da64308eb6723.tar.gz
 ```
 
-The example application has its own package name and fingerprint. For an existing application, keep its name, fingerprint, version, and paths, and add only the `z_numeral` entry to `.dependencies`.
-
-The repository is public. Zig fetches the pinned archive and verifies its hash automatically when you run `zig build`; no GitHub authentication is required.
+## Usage
 
 In `build.zig`, import the module into your executable:
 
