@@ -17,10 +17,10 @@ fn fromJson(v: std.json.Value) !n.Options {
             buf[len] = std.ascii.toLower(c);
             len += 1;
         }
-        inline for (@typeInfo(n.Options).@"struct".fields) |field| {
-            if (std.mem.eql(u8, field.name, buf[0..len])) {
-                const Child = @typeInfo(field.type).optional.child;
-                if (comptime @typeInfo(Child) == .bool) @field(o, field.name) = e.value_ptr.bool else if (comptime @typeInfo(Child) == .int) @field(o, field.name) = @intCast(e.value_ptr.integer) else if (comptime @typeInfo(Child) == .@"enum") @field(o, field.name) = std.meta.stringToEnum(Child, e.value_ptr.string).? else if (comptime Child == []const u8) @field(o, field.name) = e.value_ptr.string;
+        inline for (@typeInfo(n.Options).@"struct".field_names) |field_name| {
+            if (std.mem.eql(u8, field_name, buf[0..len])) {
+                const Child = @typeInfo(@FieldType(n.Options, field_name)).optional.child;
+                if (comptime @typeInfo(Child) == .bool) @field(o, field_name) = e.value_ptr.bool else if (comptime @typeInfo(Child) == .int) @field(o, field_name) = @intCast(e.value_ptr.integer) else if (comptime @typeInfo(Child) == .@"enum") @field(o, field_name) = std.meta.stringToEnum(Child, e.value_ptr.string).? else if (comptime Child == []const u8) @field(o, field_name) = e.value_ptr.string;
             }
         }
     }

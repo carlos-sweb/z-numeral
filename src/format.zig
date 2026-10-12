@@ -66,9 +66,9 @@ fn specialDefaults(l: *const t.Locale, output: t.Output) t.Options {
     };
 }
 fn onlyOutput(o: t.Options) bool {
-    inline for (@typeInfo(t.Options).@"struct".fields) |f| {
-        if (comptime !std.mem.eql(u8, f.name, "output") and !std.mem.eql(u8, f.name, "locale")) {
-            if (@field(o, f.name) != null) return false;
+    inline for (@typeInfo(t.Options).@"struct".field_names) |field_name| {
+        if (comptime !std.mem.eql(u8, field_name, "output") and !std.mem.eql(u8, field_name, "locale")) {
+            if (@field(o, field_name) != null) return false;
         }
     }
     return true;
@@ -113,7 +113,7 @@ fn render(w: *Writer, original: D, provided: t.Options) FormatError!void {
     const average = (o.average orelse false) or o.force_average != null or (o.total_length orelse 0) != 0;
     var abbreviation: []const u8 = "";
     if (average) {
-        const unit: ?usize = if (o.force_average) |force| @intFromEnum(force) else try averageUnit(d, o.low_precision orelse true, mode);
+        const unit: ?usize = if (o.force_average) |force| @backingInt(force) else try averageUnit(d, o.low_precision orelse true, mode);
         if (unit) |i| {
             abbreviation = (o.abbreviations orelse locale.abbreviations).at(i);
             d.scale += @intCast((i + 1) * 3);

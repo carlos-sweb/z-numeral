@@ -1,6 +1,6 @@
 # Coverage and verification matrix
 
-Pinned reference: **numbro 2.5.0 + bignumber.js 9.3.1**, with integrity hashes in `tools/package-lock.json`. Target Zig version: **0.16.0**. Results are stored in `src/fixtures.json`; the library does not execute JavaScript.
+Pinned reference: **numbro 2.5.0 + bignumber.js 9.3.1**, with integrity hashes in `tools/package-lock.json`. Target Zig version: **0.17.0**. Results are stored in `src/fixtures.json`; the library does not execute JavaScript.
 
 ## Capabilities
 

@@ -2,7 +2,7 @@
 
 [API reference](https://carlos-sweb.github.io/z-numeral/)
 
-Number formatting for **Zig 0.16.0**, with clear options, numbro patterns, and 61 locales. The module is named `numeral`. It requires no JavaScript, libc, or external runtime dependencies.
+Number formatting for **Zig 0.17.0**, with clear options, numbro patterns, and 61 locales. The module is named `numeral`. It requires no JavaScript, libc, or external runtime dependencies.
 
 ```zig
 var buffer: [128]u8 = undefined;
@@ -159,7 +159,7 @@ zig build test -Doptimize=ReleaseSafe
 zig build examples
 zig build docs
 zig build run
-zig fmt --check build.zig src examples
+zig fmt --check build.zig src examples/basic.zig examples/consumer/build.zig examples/consumer/main.zig
 python3 tools/check-docs.py
 ```
 

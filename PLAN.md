@@ -2,7 +2,7 @@
 
 ## Summary and agreed decisions
 
-Implement a library entirely in Zig 0.16.0, without external runtime dependencies, providing typed options and patterns, text parsing, numeric operations, and all locales from numbro 2.5.0.
+Implement a library entirely in Zig 0.17.0, without external runtime dependencies, providing typed options and patterns, text parsing, numeric operations, and all locales from numbro 2.5.0.
 
 - Exact mode by default: integers up to 128 bits and decimals with a u128 coefficient and scale 0–38, without silent conversions to f64.
 - Explicit compatible mode: the same results as numbro 2.5.0 for valid f64 inputs.
@@ -45,6 +45,6 @@ Node participates only in reference generation; installing and using the library
 - Test i128/u128 extremes, values >2^53, scales 0/38, carry, negatives, and division.
 - Test formatting→parsing round trips; for lossy formats, compare the displayed value.
 - Verify errors, UTF-8, grouping, limits, buffers, and allocators without leaks.
-- Run `zig build test` in Debug/ReleaseSafe, `zig fmt --check`, examples, and Linux/macOS/Windows CI with Zig 0.16.0.
+- Run `zig build test` in Debug/ReleaseSafe, `zig fmt --check`, examples, and Linux/macOS/Windows CI with Zig 0.17.0.
 
 Accept delivery when the matrix has no pending capabilities and every compatibility fixture matches. The matrix records evidence and verified limits; it does not guarantee untested behavior.

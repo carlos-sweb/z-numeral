@@ -59,8 +59,8 @@ fn fixed(buf: []u8, value: f64, precision: i16, o: t.Options) E![]const u8 {
     return w.buffered();
 }
 fn onlyOutput(o: t.Options) bool {
-    inline for (@typeInfo(t.Options).@"struct".fields) |f| {
-        if (comptime !std.mem.eql(u8, f.name, "output") and !std.mem.eql(u8, f.name, "locale")) if (@field(o, f.name) != null) return false;
+    inline for (@typeInfo(t.Options).@"struct".field_names) |field_name| {
+        if (comptime !std.mem.eql(u8, field_name, "output") and !std.mem.eql(u8, field_name, "locale")) if (@field(o, field_name) != null) return false;
     }
     return true;
 }
@@ -194,7 +194,7 @@ fn core(buf: []u8, original: f64, p: t.Options, l: *const t.Locale, separator: [
     var exponent: ?i16 = null;
     if (average) {
         var unit: ?usize = null;
-        if (o.force_average) |a| unit = @intFromEnum(a) else {
+        if (o.force_average) |a| unit = @backingInt(a) else {
             var i: usize = 4;
             while (i > 0) {
                 i -= 1;

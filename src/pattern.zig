@@ -64,7 +64,7 @@ pub fn parsePattern(text: []const u8) t.Error!t.Options {
     if (contains(s, "a")) o.average = true;
     inline for (.{ "K", "M", "B", "T" }, 0..) |marker, i| {
         if (contains(s, marker)) {
-            o.force_average = @enumFromInt(i);
+            o.force_average = @fromBackingInt(@intCast(i));
             break;
         }
     }

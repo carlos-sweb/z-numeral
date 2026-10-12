@@ -2,7 +2,7 @@
     .name = .numeral_consumer,
     .version = "0.0.0",
     .fingerprint = 0xc23a16e5828e8b35,
-    .minimum_zig_version = "0.16.0",
+    .minimum_zig_version = "0.17.0",
     .dependencies = .{
         .z_numeral = .{
             .url = "https://github.com/carlos-sweb/z-numeral/archive/75ae970a92c164c0dd0a9474a26da64308eb6723.tar.gz",

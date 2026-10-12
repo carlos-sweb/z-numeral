@@ -1,6 +1,6 @@
 # API reference
 
-Import `numeral` from a project that declares the module in its `build.zig`. Zig 0.16.0 is supported; other versions require independent validation.
+Import `numeral` from a project that declares the module in its `build.zig`. Zig 0.17.0 is supported; other versions require independent validation.
 
 ## Formatting
 

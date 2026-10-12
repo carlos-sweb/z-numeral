@@ -56,8 +56,8 @@ pub const Options = struct {
     /// Overlay non-null fields on base options, preserving explicit false, zero and empty strings.
     pub fn merge(base: Options, overlay: Options) Options {
         var result = base;
-        inline for (@typeInfo(Options).@"struct".fields) |field| {
-            if (@field(overlay, field.name)) |v| @field(result, field.name) = v;
+        inline for (@typeInfo(Options).@"struct".field_names) |field_name| {
+            if (@field(overlay, field_name)) |v| @field(result, field_name) = v;
         }
         return result;
     }

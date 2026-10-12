@@ -1,4 +1,4 @@
-//! z-numeral: exact and numbro-compatible number formatting for Zig 0.16.0.
+//! z-numeral: exact and numbro-compatible number formatting for Zig 0.17.0.
 const std = @import("std");
 pub const version = "0.1.0";
 pub const reference_version = "numbro@2.5.0";
