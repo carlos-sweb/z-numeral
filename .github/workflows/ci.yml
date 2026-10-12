@@ -27,7 +27,7 @@ jobs:
           version: 0.17.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 26.5.0
       - run: npm ci --prefix tools --ignore-scripts --no-audit --no-fund
       - run: node tools/generate.mjs
       - run: git diff --exit-code -- src/locales.zig src/fixtures.json

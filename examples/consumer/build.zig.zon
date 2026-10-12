@@ -5,8 +5,8 @@
     .minimum_zig_version = "0.17.0",
     .dependencies = .{
         .z_numeral = .{
-            .url = "https://github.com/carlos-sweb/z-numeral/archive/75ae970a92c164c0dd0a9474a26da64308eb6723.tar.gz",
-            .hash = "z_numeral-0.1.0-M3lvynbBmAB5mc4J16LzgHYPtvmOomSfcmPmwHED6huh",
+            .url = "https://github.com/carlos-sweb/z-numeral/archive/3fba1636a56776b3f586f3cfdf7f91792c1d16e8.tar.gz",
+            .hash = "z_numeral-0.1.0-M3lvyofKmACjaKyeAzrgcE1c1Qy24Yx9fioEXiTHnog2",
         },
     },
     .paths = .{ "build.zig", "build.zig.zon", "main.zig" },

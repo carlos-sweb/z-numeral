@@ -18,7 +18,7 @@ try std.testing.expectEqualStrings("1,234,567.00", result);
 Run this command from your Zig project's directory:
 
 ```sh
-zig fetch --save=z_numeral https://github.com/carlos-sweb/z-numeral/archive/75ae970a92c164c0dd0a9474a26da64308eb6723.tar.gz
+zig fetch --save=z_numeral https://github.com/carlos-sweb/z-numeral/archive/3fba1636a56776b3f586f3cfdf7f91792c1d16e8.tar.gz
 ```
 
 ## Usage
@@ -172,4 +172,4 @@ npm ci --prefix tools --ignore-scripts --no-audit --no-fund
 node tools/generate.mjs
 ```
 
-The lockfile pins numbro 2.5.0 and bignumber.js 9.3.1 with integrity hashes. The generator uses a fixed seed for random cases and applies `zig fmt` to the locale catalog. The [plan](PLAN.md), [API reference](docs/API.md), and [coverage matrix](docs/COVERAGE.md) explain decisions, limits, and tests. Derived code and data retain the MIT notices for [numbro](LICENSE) and [Numeral.js](LICENSE-Numeraljs).
+Fixture regeneration uses Node.js 26.5.0, matching CI. The lockfile pins numbro 2.5.0 and bignumber.js 9.3.1 with integrity hashes. The generator uses a fixed seed for random cases and applies `zig fmt` to the locale catalog. The [plan](PLAN.md), [API reference](docs/API.md), and [coverage matrix](docs/COVERAGE.md) explain decisions, limits, and tests. Derived code and data retain the MIT notices for [numbro](LICENSE) and [Numeral.js](LICENSE-Numeraljs).
